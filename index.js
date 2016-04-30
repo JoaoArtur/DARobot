@@ -1,0 +1,31 @@
+'use strict';
+var http = require('http');
+
+var port = (process.env.PORT || 5000);
+
+http.createServer(function(request,response) {
+	response.writeHead(200,{'Content-Type': 'application/json'});
+	response.write(JSON.stringify({name: 'darobot',ver:'1.0'}));
+	response.end();
+}).listen(port);
+
+var TelegramBot = require('node-telegram-bot-api');
+
+var token = '202954772:AAGN6SiQJKUtiPJfVEMrB-_x_u15meWWFFY';
+// Setup polling way
+var bot = new TelegramBot(token, {polling: true});
+
+// Matches /echo [whatever]
+bot.onText(/\/echo (.+)/, function (msg, match) {
+  var fromId = msg.from.id;
+  var resp = match[1];
+  bot.sendMessage(fromId, resp);
+});
+
+// Any kind of message
+bot.on('message', function (msg) {
+  var chatId = msg.chat.id;
+  // photo can be: a file path, a stream or a Telegram file_id
+  var photo = 'cats.png';
+  bot.sendPhoto(chatId, photo, {caption: 'Lovely kittens'});
+});
