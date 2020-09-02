@@ -23,7 +23,7 @@
   "author": "Yago Pérez <yagoperezs@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "bl": "^1.1.2",
+    "bl": "^4.0.3",
     "bluebird": "^3.3.4",
     "debug": "^2.2.0",
     "eventemitter3": "^1.2.0",
